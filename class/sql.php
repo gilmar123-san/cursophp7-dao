@@ -1,0 +1,53 @@
+<?php
+
+class sql extends PDO {
+
+	private $conexao;
+
+	public function __construct(){
+
+		$this->conexao = new PDO("mysql:host=localhost; dbname=bdphp7", "root", "" );
+
+	}
+
+	private function setParams($statment, $parameters = array()){
+
+		foreach ($parameters as $key => $value) {
+			
+			$this->bindParam($key, $value);
+
+		}
+
+	}
+
+
+	private function setParam($statment, $key, $value){
+
+		$statment->bindParam ($key, $values);
+
+	}
+
+	public function query($rowQuery, $params = array()){
+
+		$stmt = $this->conexao->prepare($rowQuery);
+
+			$this->setParams($stmt, $params);
+
+			$stmt->execute();
+
+			return $stmt;
+
+		}
+
+
+		public function select($rowQuery, $params = array()):array {
+
+			$stmt = $this->query($rowQuery, $params);
+
+			return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		}
+
+}
+
+?>
