@@ -23,7 +23,7 @@ class sql extends PDO {
 
 	private function setParam($statment, $key, $value){
 
-		$statment->bindParam ($key, $value);
+		$statment->db2_bind_param(stmt, parameter-number, variable-name)am ($key, $value);
 
 	}
 

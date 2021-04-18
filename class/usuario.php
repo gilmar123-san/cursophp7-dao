@@ -54,6 +54,47 @@ public function loadById($id){
 
 }
 
+public static function getlist(){
+
+	$sql = new sql();
+
+	return $sql->select("SELECT * FROM TB_USUARIOS ORDER BY DESLOGIN;");
+
+}
+
+public static function search($login){
+
+	$sql = new sql();
+
+	return $sql->select("SELECT * FROM TB_USUARIOS WHERE DESLOGIN LIKE :SEARCH ORDER BY DESLOGIN", array(':SEARCH'=>"%".$login."%"));
+
+}
+
+public function login($login, $senha){
+
+	$sql = new sql();
+
+	$results = $sql->select("SELECT * from tb_usuarios where deslogin = :LOGIN AND dessenha = :SENHA", array(':LOGIN'=>$login,
+	':SENHA'=>$senha));
+
+	if(count($results) > 0 ){
+
+		$row = $results[0];
+
+		$this->setIdusuario($row['idusuario']);
+		$this->setDeslogin($row['deslogin']);
+		$this->setDessenha($row['dessenha']);
+		$this->setDtcadastro(new DateTime($row['dtcadastro']));
+
+	}else{
+
+		throw new Exception("Login e/ou senha inválidos");
+		
+
+	}
+
+}
+
 public function __toString(){
 
 	return json_encode(array(
