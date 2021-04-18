@@ -25,8 +25,25 @@ echo json_encode($usuarios);*/
 
 //carrega o usuário usando o lçogin e a senha;
 
-$usuario = new Usuario();
-$usuario->login("gilmar", "56984");
+//$usuario = new Usuario();
+//$usuario->login("gilmar", "56984");
+
+//echo $usuario;
+
+
+/*Criando um novo usuário
+$aluno = new usuario("aluno", "@aluno");
+
+$aluno->insert();
+
+echo $aluno;
+*/
+
+$usuario = new usuario();
+
+$usuario->loadById(4);
+
+$usuario->update("professor","@#$$%%");
 
 echo $usuario;
 
